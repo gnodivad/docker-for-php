@@ -6,3 +6,12 @@ services:
             - 8080:80
         volumes:
             - .:/srv/app
+    mysql:
+        image: mariadb:10.1.21
+        ports:
+            - 13306:3306
+        environment:
+            MYSQL_DATABASE: homestead
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: homestead
+            MYSQL_PASSWORD: secret
