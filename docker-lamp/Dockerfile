@@ -1,7 +1,8 @@
 FROM php:7.2-apache-stretch
 
-COPY docker/php/php.ini /usr/local/etc/php/php.ini
-COPY . /srv/app
-COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
+RUN docker-php-ext-install pdo_mysql opcache \
+    && a2enmod rewrite negotiation
 
-RUN docker-php-ext-install pdo_mysql
+COPY docker/php/php.ini /usr/local/etc/php/php.ini
+COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY . /srv/app
