@@ -1,5 +1,6 @@
 FROM php:7.2-fpm-stretch
 
+COPY docker/php/php.ini /usr/local/etc/php/php.ini
 COPY . /srv/app
 
 WORKDIR /srv/app
