@@ -1,6 +1,8 @@
 version: "3"
 services:
   app:
+    image: cakephp-app
+    container_name: cakephp-app
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -8,3 +10,15 @@ services:
       - 8888:80
     volumes:
       - .:/srv/cakephp
+
+  cake:
+    image: cakephp-app
+    container_name: cakephp-console
+    depends_on:
+      - app
+    volumes:
+      - .:/srv/cakephp
+    entrypoint: [
+      "/srv/cakephp/app/Console/cake",
+      "-app", '/srv/cakephp/app'
+    ]
