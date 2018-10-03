@@ -15,11 +15,18 @@ RUN apt-get -yqq update \
 
 COPY docker/httpd-foreground.sh /usr/local/bin/httpd-foreground
 COPY docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/php/cli/*.ini /etc/php5/cli/conf.d/
+COPY docker/composer-installer.sh /usr/local/bin/composer-installer
 COPY . /srv/cakephp
 
 RUN ln -s /etc/apache2/sites-available/000-default.conf \
     /etc/apache2/sites-enabled/000-default.conf \
     && chmod +x /usr/local/bin/httpd-foreground \
+    && chmod +x /usr/local/bin/composer-installer \
+    && composer-installer \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod +x /usr/local/bin/composer \
+    && composer --version \
     && chown -R www-data:www-data /srv/cakephp
 
 WORKDIR /srv/cakephp
