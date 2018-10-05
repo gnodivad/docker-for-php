@@ -51,7 +51,7 @@
  * database. Uses database default not specified.
  *
  * sslmode =>
- * For Postgres specifies whether to 'disable', 'allow', 'prefer', or 'require' SSL for the 
+ * For Postgres specifies whether to 'disable', 'allow', 'prefer', or 'require' SSL for the
  * connection. The default value is 'allow'.
  *
  * unix_socket =>
@@ -66,27 +66,59 @@
  * flags =>
  * A key/value array of driver specific connection options.
  */
-class DATABASE_CONFIG {
+class DATABASE_CONFIG
+{
+    public $test = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'user',
+        'password' => 'password',
+        'database' => 'test_database_name',
+        'prefix' => '',
+        //'encoding' => 'utf8',
+    );
 
-	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'database_name',
-		'prefix' => '',
-		//'encoding' => 'utf8',
-	);
+    public function __construct()
+    {
+        $this->default= array(
+            'datasource' => cakeenv(
+                'DB_DATASOURCE',
+                'Database/Mysql'
+            ),
+            'persistent' => false,
+            'host' => cakeenv(
+                'DB_HOST',
+                'localhost'
+            ),
+            'login' => cakeenv(
+                'DB_USER',
+                'user'
+            ),
+            'password' => cakeenv(
+                'DB_PASSWORD',
+                'password'
+            ),
+            'database' => cakeenv(
+                'DB_DATABASE',
+                'database_name'
+            ),
+            'prefix' => cakeenv(
+                'DB_PREFIX',
+                ''
+            ),
+        //'encoding' => 'utf8',
+        );
+    }
 
-	public $test = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'test_database_name',
-		'prefix' => '',
-		//'encoding' => 'utf8',
-	);
+    public $default = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'user',
+        'password' => 'password',
+        'database' => 'database_name',
+        'prefix' => '',
+        //'encoding' => 'utf8',
+    );
 }
