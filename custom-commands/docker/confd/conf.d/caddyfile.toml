@@ -1,0 +1,5 @@
+[template]
+src = "caddyfile.tmpl"
+dest = "/etc/Caddyfile"
+owner = "www-data"
+mode = "0644"

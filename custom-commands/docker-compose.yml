@@ -8,3 +8,5 @@ services:
             - 2015:2015
         volumes:
             - .:/srv/app
+        environment:
+            CADDY_HOSTNAME: "example.com"
