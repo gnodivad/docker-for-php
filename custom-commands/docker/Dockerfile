@@ -10,7 +10,6 @@ RUN curl --silent --show-error --fail --location \
     && caddy -version \
     && docker-php-ext-install mbstring pdo pdo_mysql
 
-COPY docker/Caddyfile /etc/Caddyfile
 COPY docker/caddy.sh /usr/local/bin/caddy
 COPY . /srv/app
 COPY docker/confd/ /etc/confd/
@@ -21,6 +20,8 @@ WORKDIR /srv/app
 RUN chmod +x /usr/local/bin/caddy \
     && chmod +x /usr/local/bin/confd \
     && chown -R www-data:www-data /srv/app
+
+EXPOSE 80
 
 CMD [ "/usr/local/bin/caddy"]
 

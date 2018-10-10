@@ -2,6 +2,9 @@
 
 set -e
 
-echo "hello from caddy.sh"
+echo "The hostname is $CADDY_HOSTNAME"
 
-exit 1
+confd -onetime -backend env
+
+/usr/bin/caddy -validate -agree=true -conf=/etc/Caddyfile
+exec /usr/bin/caddy -agree=true -conf=/etc/Caddyfile

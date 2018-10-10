@@ -5,8 +5,8 @@ services:
             context: .
             dockerfile: docker/Dockerfile
         ports:
-            - 2015:2015
+            - 8080:80
         volumes:
             - .:/srv/app
         environment:
-            CADDY_HOSTNAME: "example.com"
+            CADDY_HOSTNAME: "example.com" #Remember add it in host file
