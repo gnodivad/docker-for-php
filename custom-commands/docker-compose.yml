@@ -4,9 +4,15 @@ services:
         build:
             context: .
             dockerfile: docker/Dockerfile
+        depends_on:
+            - consul
         ports:
             - 8080:80
         volumes:
             - .:/srv/app
         environment:
             CADDY_HOSTNAME: "example.com" #Remember add it in host file
+    consul:
+        image: consul:1.0.1
+        ports:
+            - 8500:8500

@@ -1,4 +1,4 @@
-http://{{getenv "CADDY_HOSTNAME"}}:80
+http://{{getv "/example.com/hostname"}}:80
 root /srv/app/public
 fastcgi / 127.0.0.1:9000 php
 rewrite {
@@ -12,4 +12,4 @@ header / -Server
 log stdout
 errors stdout
 
-on startup php-fpm --nodaemonize
+# on startup php-fpm --nodaemonize

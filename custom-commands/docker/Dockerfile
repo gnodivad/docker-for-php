@@ -10,6 +10,9 @@ RUN curl --silent --show-error --fail --location \
     && caddy -version \
     && docker-php-ext-install mbstring pdo pdo_mysql
 
+RUN apt-get update \
+    && apt-get -y install procps
+
 COPY docker/caddy.sh /usr/local/bin/caddy
 COPY . /srv/app
 COPY docker/confd/ /etc/confd/
